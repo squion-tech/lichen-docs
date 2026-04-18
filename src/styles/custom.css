@@ -1,0 +1,39 @@
+:root {
+	--sl-color-accent-low: #14301a;
+	--sl-color-accent: #16a34a;
+	--sl-color-accent-high: #4ade80;
+	--sl-color-white: #ffffff;
+	--sl-color-gray-1: #eef2f0;
+	--sl-color-gray-2: #c9d6ce;
+	--sl-color-gray-3: #8fa898;
+	--sl-color-gray-4: #3d5446;
+	--sl-color-gray-5: #1e3028;
+	--sl-color-gray-6: #111d17;
+	--sl-color-black: #080f0b;
+}
+
+:root[data-theme='light'] {
+	--sl-color-accent-low: #dcfce7;
+	--sl-color-accent: #16a34a;
+	--sl-color-accent-high: #14532d;
+}
+
+/* Hero 区域优化 */
+.hero {
+	padding-block: 4rem;
+}
+
+.hero > .sl-flex {
+	gap: 2rem;
+}
+
+/* 代码块优化 */
+.expressive-code .frame {
+	border-radius: 8px;
+}
+
+/* 导航 Logo 字体 */
+.site-title {
+	font-weight: 700;
+	letter-spacing: -0.02em;
+}

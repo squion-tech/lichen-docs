@@ -1,0 +1,117 @@
+---
+title: Lichen — 轻量级服务器监控
+description: 专为独立开发者和小团队设计的服务器监控平台。一个 Agent + 一个 API = 完整监控方案。
+template: splash
+hero:
+  tagline: 一个 Agent，监控你的所有服务器。3 分钟上线，永久免费自托管。
+  actions:
+    - text: 5 分钟快速上手
+      link: /guides/quickstart/
+      icon: right-arrow
+      variant: primary
+    - text: Docker 一键部署
+      link: /guides/deploy-docker/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+## 为什么选择 Lichen？
+
+<CardGrid stagger>
+	<Card title="极简部署" icon="rocket">
+		`docker compose up -d` 即可启动完整监控平台。单容器，内置 SQLite，无需额外依赖。
+	</Card>
+	<Card title="Agent 超轻量" icon="puzzle">
+		Go 单二进制，~10MB，支持 Linux 和 macOS。systemd 一键注册，开机自动运行。
+	</Card>
+	<Card title="国内通知全覆盖" icon="bell">
+		飞书 · 钉钉 · 企业微信 · Telegram · Slack · Discord · 邮件 · 通用 Webhook，8 种渠道开箱即用。
+	</Card>
+	<Card title="离线不丢数据" icon="seti:db">
+		Agent 本地缓冲 ~24 小时数据，网络恢复后自动补传，监控数据零丢失。
+	</Card>
+</CardGrid>
+
+---
+
+## 核心功能
+
+<CardGrid>
+	<Card title="📊 全面的指标采集" icon="chart-square-bar">
+		CPU · 内存 · 磁盘 · 网络 I/O · 磁盘 I/O · 系统负载，采集间隔 10-300s 自由配置。
+	</Card>
+	<Card title="📝 日志关键词告警" icon="document">
+		监控任意日志文件，ERROR / panic / FATAL 实时触发告警，第一时间知道线上出了什么问题。
+	</Card>
+	<Card title="🐳 Docker 容器监控" icon="seti:docker">
+		采集所有容器的 CPU · 内存 · 网络指标，历史图表一眼看出哪个容器在吃资源。（Pro）
+	</Card>
+	<Card title="👥 团队协作" icon="group">
+		多工作区，邮件邀请，owner / admin / member 三级权限。Pro 按工作区计费，不按座位。
+	</Card>
+</CardGrid>
+
+---
+
+## 3 步开始监控
+
+```bash
+# 步骤 1：启动 Lichen 服务
+docker run -d --name lichen \
+  -p 8787:8787 -v lichen-data:/data \
+  -e JWT_SECRET=$(openssl rand -hex 32) \
+  ghcr.io/squion/lichen:latest
+
+# 步骤 2：打开 Dashboard，注册账号，创建主机并复制 API Token
+
+# 步骤 3：在被监控服务器上安装 Agent
+curl -sSL https://lichen.squion.com/install.sh | \
+  LICHEN_SERVER_URL=http://your-server:8787 \
+  LICHEN_API_TOKEN=tok_xxx \
+  LICHEN_HOST_ID=$(uuidgen) \
+  bash
+```
+
+[查看完整快速开始指南 →](/guides/quickstart/)
+
+---
+
+## 定价
+
+| | Free | Pro |
+|---|---|---|
+| **价格** | 永久免费 | ¥49 / 月 / 工作区 |
+| **主机数量** | 5 台 | 50 台 |
+| **告警规则** | 3 条 | 无限制 |
+| **指标保留** | 7 天 | 90 天 |
+| **日志条数** | 1,000 | 50,000 |
+| **团队成员** | 仅自己 | 无限制 |
+| **Docker 监控** | ❌ | ✅ |
+| **自托管** | ✅ 永久免费 | ✅ 功能全开 |
+
+> **自托管用户**：Docker 部署完全免费，所有基础功能不受限。Pro 许可证解锁 Docker 监控和团队协作。
+
+[立即免费注册 →](https://lichen.squion.com/register)
+
+---
+
+## 与竞品对比
+
+| | Lichen | Datadog | Uptime Kuma | Beszel |
+|---|---|---|---|---|
+| 部署难度 | ⭐ Docker 一键 | ❌ 复杂 | ✅ 简单 | ✅ 简单 |
+| 指标 + 日志 + 告警 | ✅ 全内置 | ✅ | ⚠️ 仅 Uptime | ✅ |
+| 国内通知渠道 | ✅ 飞书/钉钉/企业微信 | ❌ | ⚠️ 有限 | ⚠️ 有限 |
+| 团队协作 | ✅ | ✅ | ❌ | ❌ |
+| SaaS 价格 | ¥49/月 | 💸💸💸 | — | — |
+| 自托管价格 | **免费** | ❌ | 免费 | 免费 |
+
+---
+
+<LinkCard
+	title="5 分钟快速上手"
+	description="从零开始，安装 Agent，配置第一条告警规则"
+	href="/guides/quickstart/"
+/>
